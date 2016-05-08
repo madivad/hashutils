@@ -20,10 +20,8 @@
         <p class="header">linux based hashing utilities for files and directory comparison</p>
 
         <ul>
-          <!-- # remove buttons until there's something to download
           <li class="download"><a class="buttons" href="https://github.com/madivad/hashutils/zipball/master">Download ZIP</a></li>
           <li class="download"><a class="buttons" href="https://github.com/madivad/hashutils/tarball/master">Download TAR</a></li>
-          -->
           <li><a class="buttons github" href="https://github.com/madivad/hashutils">View On GitHub</a></li>
         </ul>
 
@@ -45,6 +43,30 @@
 <p>At this point I will initially be looking to compile this mainly for linux and eventually OS X, and then (maybe) Windows. It would be good to include a windows version, but I haven't used Windows since the days of XP.</p>
 
 <p>It's quite possible this will start out as a set of bash scripts and migrate to a compiled (C/C++) binary or possibly Python. I have a preference for a binary, however that's a much bigger learning curve for me. Let's see how we go. </p>
+
+<h2>
+<a id="proposed-features" class="anchor" href="#proposed-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>proposed features</h2>
+
+<pre><code>hashutils &lt;dir1&gt; &lt;dir2&gt;     
+  compare files in &lt;dir1&gt; to files in &lt;dir2&gt;
+    compare only files in &lt;dir1&gt; and do they exist in &lt;dir2&gt;
+    compare directories and create report
+      files in both directories
+      files in dir1 only
+      files in dir2 only
+      files conflicting between directories
+        these are filenames that exist in both directories but are not identical
+
+hashutils &lt;path/to/file1&gt; &lt;path/to/file2&gt;
+  compare two files (not necessarily in the same directory)
+
+hashutils &lt;path/to/file&gt; &lt;dir&gt;
+  does &lt;file&gt; appear in &lt;dir&gt;
+    initial search by filename
+      file exists and is the same (name,size,hash)
+      file exists and is &lt;new name&gt;
+      file does not exist
+</code></pre>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
