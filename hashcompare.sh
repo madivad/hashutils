@@ -21,78 +21,78 @@ do
 key="$1"
 
 case $key in
-    -a|--file-a)
-        FILEA="$2"
-        shift # past argument
-        [[ ! -f "$FILEA" ]] && ERROR="File: ${FILEA} does not exist"
-    ;;
-    -b|--file-b)
-        FILEB="$2"
-        shift # past argument
-        [[ ! -f "$FILEB" ]] && ERROR="File: ${FILEB} does not exist"
-    ;;
-    -d|--dupe)
-        SHOWDUPE=1
-    ;;
-    --debug)
-        DEBUG=1
-    ;;
-    --no-debug)
-        DEBUG=0
-    ;;
-    -h|--help)
-        SHOWHELP=1
-    ;;
-    -m|--md5|-md5)
-        MD5=1
-        HASHDEEP=0
-    ;;
-    -n|--no-pause)
-        NOPAUSE=1
+  -a|--file-a)
+    FILEA="$2"
+    shift # past argument
+    [[ ! -f "$FILEA" ]] && ERROR="File: ${FILEA} does not exist"
+  ;;
+  -b|--file-b)
+    FILEB="$2"
+    shift # past argument
+    [[ ! -f "$FILEB" ]] && ERROR="File: ${FILEB} does not exist"
+  ;;
+  -d|--dupe)
+    SHOWDUPE=1
+  ;;
+  --debug)
+    DEBUG=1
+  ;;
+  --no-debug)
+    DEBUG=0
+  ;;
+  -h|--help)
+    SHOWHELP=1
+  ;;
+  -m|--md5|-md5)
+    MD5=1
+    HASHDEEP=0
+  ;;
+  -n|--no-pause)
+    NOPAUSE=1
+    PAUSE=0
+  ;;
+  -o|--output-file)
+    OUTFILE="$2"
+    shift
+  ;;
+  -p|--pattern1)
+	 PATTERN1="$2"
+	  shift
+  ;;
+  -q|--pattern2)
+	 PATTERN2="$2"
+	  shift
+  ;;
+  -v|--verbosity)
+    case "$2" in
+      1)
+        VERBOSE=1
         PAUSE=0
-    ;;
-    -o|--output-file)
-        OUTFILE="$2"
-        shift
-    ;;
-    -p|--pattern1)
-	PATTERN1="$2"
-	shift
-    ;;
-    -q|--pattern2)
-	PATTERN2="$2"
-	shift
-    ;;
-    -v|--verbosity)
-        case "$2" in
-            1)
-                  VERBOSE=1
-                  PAUSE=0
-                  NOPAUSE=1
-            ;;
-            2)
-                 VERBOSE=2
-            ;;
-            3)
-                 VERBOSE=3
-            ;;
-            *)
-                 echo "Valid modes for verbosity are [1..3]. Mode 2 selected."
-                 VERBOSE=2
-            ;;
-            esac
-            shift
-    ;;
-    --default)
+        NOPAUSE=1
+      ;;
+      2)
+        VERBOSE=2
+      ;;
+      3)
+        VERBOSE=3
+      ;;
+      *)
+        echo "Valid modes for verbosity are [1..3]. Mode 2 selected."
+        VERBOSE=2
+      ;;
+    esac
+    shift
+  ;;
+  --default)
     DEFAULT=YES
-    ;;
-    *)
-        echo ""
-        echo "Unknown option $1."
-        echo ""
-        SHOWHELP=1
-        break 2
-    ;;
+  ;;
+  *)
+    echo ""
+    echo "Unknown option $1."
+    echo ""
+    SHOWHELP=1
+    break 2
+  ;;
 esac
 shift # past argument or value
 done
@@ -107,22 +107,22 @@ fi
 
 if [ $SHOWHELP -eq 1 ]
 then
-            echo "Usage:"
-            echo "-a, --file-a  [file]  use file as the first input file (original dir)"
-            echo "-b, --file-b  [file]  use file as the second input file (destination dir)"
-            echo "-d, --dupe            show duplicate files"
-			echo "-m, --md5             use MD5DEEP version format"
-			echo "-n, --no-pause        don't pause between stats and output (def: -v 1)"
-			echo "-o, --output-file     filename to use for output ('results' used if not declared"
-			echo "-p, --pattern1        pattern to remove from either input file"
-			echo "-q, --pattern2        a second pattern to be removed from both files"
-            echo "-z, --zero            show zero length files"
-            echo "-v, --verbose [1..3]  verbosity level:"
-            echo "                       1 = just show counts (implies --no-pause)"
-            echo "                       2 = show errors/mismatches (default)"
-            echo "                       3 = show everything"
-            echo ""
-			exit 1
+  echo "Usage:"
+  echo "-a, --file-a  [file]  use file as the first input file (original dir)"
+  echo "-b, --file-b  [file]  use file as the second input file (destination dir)"
+  echo "-d, --dupe            show duplicate files"
+	echo "-m, --md5             use MD5DEEP version format"
+	echo "-n, --no-pause        don't pause between stats and output (def: -v 1)"
+	echo "-o, --output-file     filename to use for output ('results' used if not declared"
+	echo "-p, --pattern1        pattern to remove from either input file"
+	echo "-q, --pattern2        a second pattern to be removed from both files"
+  echo "-z, --zero            show zero length files"
+  echo "-v, --verbose [1..3]  verbosity level:"
+  echo "                       1 = just show counts (implies --no-pause)"
+  echo "                       2 = show errors/mismatches (default)"
+  echo "                       3 = show everything"
+  echo ""
+	exit 1
 fi
 if [ $DEBUG -eq 1 ]
 then
@@ -136,9 +136,6 @@ then
 	#echo "Number files in SEARCH PATH with EXTENSION:" $(ls -1 "${SEARCHPATH}"/*."${EXTENSION}" | wc -l)
 	echo
 fi
-
-
-
 
 if [ "$MD5" = "1" ]
 then
